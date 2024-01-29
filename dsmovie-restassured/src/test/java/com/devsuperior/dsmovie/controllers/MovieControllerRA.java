@@ -20,7 +20,6 @@ public class MovieControllerRA {
 	}
 
 	@Test
-	public void findAllShouldReturnOkWhenMovieNoArgumentsGiven() {
 	@DisplayName("Find All Should Return Ok When Movie No Arguments Given")
 	public void findAllShouldReturnOkWhenMovieNoArgumentsGiven() throws Exception {
 		given()
@@ -54,6 +53,24 @@ public class MovieControllerRA {
 	
 	@Test
 	public void findAllShouldReturnPagedMoviesWhenMovieTitleParamIsNotEmpty() {		
+	@DisplayName("Find All Should Return Page Movies When Movie Title Param Is Not Empty")
+	public void findAllShouldReturnPagedMoviesWhenMovieTitleParamIsNotEmpty() throws Exception {
+		var movieTitle = "Venom";
+
+		given()
+			.header("Content-type", "application/json")
+			.contentType(ContentType.JSON)
+		.when().get("/movies?title={movieTitle}", movieTitle)
+		.then()
+			.statusCode(200)
+			.body("content.id", hasItems(2))
+			.body("content.score", hasItems(3.3f))
+			.body("content.count", hasItems(3))
+			.body("content.image", hasItems(baseImgUri + "/vIgyYkXkg6NC2whRbYjBD7eb3Er.jpg"))
+			.body("pageable.paged", equalTo(true))
+			.body("numberOfElements", is(1))
+			.body("empty", equalTo(false))
+		;
 	}
 	
 	@Test
