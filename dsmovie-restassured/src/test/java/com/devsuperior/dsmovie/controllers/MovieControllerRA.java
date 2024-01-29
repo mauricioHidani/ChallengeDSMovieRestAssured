@@ -168,6 +168,20 @@ public class MovieControllerRA {
 	}
 	
 	@Test
+	@DisplayName("Insert Should Return Unauthorized When Invalid Token")
 	public void insertShouldReturnUnauthorizedWhenInvalidToken() throws Exception {
+		var postBody = new JSONObject(move);
+
+		given()
+			.header("Content-type", "application/json")
+			.header("Authorization", "Bearer " + invalidToken)
+			.contentType(ContentType.JSON)
+			.accept(ContentType.JSON)
+			.body(postBody)
+		.when().post("/movies")
+		.then()
+			.statusCode(401)
+		;
 	}
+
 }
