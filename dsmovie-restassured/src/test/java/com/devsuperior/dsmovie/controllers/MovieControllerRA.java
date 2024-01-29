@@ -11,7 +11,6 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 public class MovieControllerRA {
-	
 
 	private Long existingId, nonExistingId;
 	private String baseImgUri;
@@ -58,7 +57,6 @@ public class MovieControllerRA {
 	}
 	
 	@Test
-	public void findAllShouldReturnPagedMoviesWhenMovieTitleParamIsNotEmpty() {		
 	@DisplayName("Find All Should Return Page Movies When Movie Title Param Is Not Empty")
 	public void findAllShouldReturnPagedMoviesWhenMovieTitleParamIsNotEmpty() throws Exception {
 		var movieTitle = "Venom";
@@ -81,7 +79,6 @@ public class MovieControllerRA {
 	}
 	
 	@Test
-	public void findByIdShouldReturnMovieWhenIdExists() {		
 	@DisplayName("Find By Id Should Return Movie When Id Exists")
 	public void findByIdShouldReturnMovieWhenIdExists() throws Exception {
 		given()
@@ -99,7 +96,15 @@ public class MovieControllerRA {
 	}
 	
 	@Test
-	public void findByIdShouldReturnNotFoundWhenIdDoesNotExist() {	
+	@DisplayName("Find By Is Should Return Not Found When Id Does Not Exist")
+	public void findByIdShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
+		given()
+			.header("Content-type", "application/json")
+			.contentType(ContentType.JSON)
+		.when().get("/movies/{id}", nonExistingId)
+			.then()
+			.statusCode(404)
+		;
 	}
 	
 	@Test
