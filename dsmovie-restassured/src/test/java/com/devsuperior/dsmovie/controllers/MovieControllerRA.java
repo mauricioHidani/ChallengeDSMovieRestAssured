@@ -12,10 +12,16 @@ import static org.hamcrest.Matchers.*;
 
 public class MovieControllerRA {
 	
+
+	private Long existingId, nonExistingId;
 	private String baseImgUri;
+
 	@BeforeEach
 	void setUp() throws Exception {
 		baseURI = "http://localhost:8080";
+
+		existingId = 2L;
+		nonExistingId = 5000L;
 		baseImgUri = "https://www.themoviedb.org/t/p/w533_and_h300_bestv2";
 	}
 
@@ -76,6 +82,20 @@ public class MovieControllerRA {
 	
 	@Test
 	public void findByIdShouldReturnMovieWhenIdExists() {		
+	@DisplayName("Find By Id Should Return Movie When Id Exists")
+	public void findByIdShouldReturnMovieWhenIdExists() throws Exception {
+		given()
+			.header("Content-type", "application/json")
+			.contentType(ContentType.JSON)
+		.when().get("/movies/{id}", existingId)
+		.then()
+			.statusCode(200)
+			.body("id", is(2))
+			.body("title", equalTo("Venom: Tempo de Carnificina"))
+			.body("score", is(3.3f))
+			.body("count", is(3))
+			.body("image", equalTo(baseImgUri + "/vIgyYkXkg6NC2whRbYjBD7eb3Er.jpg"))
+		;
 	}
 	
 	@Test
