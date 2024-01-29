@@ -1,5 +1,6 @@
 package com.devsuperior.dsmovie.controllers;
 
+import com.devsuperior.dsmovie.tests.TokenUtil;
 import io.restassured.http.ContentType;
 import org.json.JSONException;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,12 +13,24 @@ import static org.hamcrest.Matchers.*;
 
 public class MovieControllerRA {
 
+	private String clientUsername, clientPassword, adminUsername, adminPassword;
+	private String clientToken, adminToken, invalidToken;
+
 	private Long existingId, nonExistingId;
 	private String baseImgUri;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		baseURI = "http://localhost:8080";
+
+		// Authenticated users (client/admin)
+		clientUsername = "maria@gmail.com";
+		clientPassword = "123456";
+		adminUsername = "alex@gmail.com";
+		adminPassword = "123456";
+		clientToken = TokenUtil.obtainAccessToken(clientUsername, clientPassword);
+		adminToken = TokenUtil.obtainAccessToken(adminUsername, adminPassword);
+		invalidToken = "invalid-token";
 
 		existingId = 2L;
 		nonExistingId = 5000L;
