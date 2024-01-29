@@ -133,7 +133,21 @@ public class MovieControllerRA {
 	}
 	
 	@Test
-	public void insertShouldReturnUnprocessableEntityWhenAdminLoggedAndBlankTitle() throws JSONException {		
+	@DisplayName("Insert Should Return Unprocessable Entity When Admin Logged And Blank Title")
+	public void insertShouldReturnUnprocessableEntityWhenAdminLoggedAndBlankTitle() throws JSONException {
+		move.replace("title", "");
+		var postBody = new JSONObject(move);
+
+		given()
+			.header("Content-type", "application/json")
+			.header("Authorization", "Bearer " + adminToken)
+			.contentType(ContentType.JSON)
+			.accept(ContentType.JSON)
+			.body(postBody)
+		.when().post("/movies")
+		.then()
+			.statusCode(422)
+		;
 	}
 	
 	@Test
