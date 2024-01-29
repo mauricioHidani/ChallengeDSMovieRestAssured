@@ -102,7 +102,7 @@ public class MovieControllerRA {
 			.header("Content-type", "application/json")
 			.contentType(ContentType.JSON)
 		.when().get("/movies/{id}", nonExistingId)
-			.then()
+		.then()
 			.statusCode(404)
 		;
 	}
