@@ -30,9 +30,9 @@ public class MovieControllerRA {
 		baseURI = "http://localhost:8080";
 
 		// Authenticated users (client/admin)
-		clientUsername = "maria@gmail.com";
+		clientUsername = "joaquim@gmail.com";
 		clientPassword = "123456";
-		adminUsername = "alex@gmail.com";
+		adminUsername = "maria@gmail.com";
 		adminPassword = "123456";
 		clientToken = TokenUtil.obtainAccessToken(clientUsername, clientPassword);
 		adminToken = TokenUtil.obtainAccessToken(adminUsername, adminPassword);
