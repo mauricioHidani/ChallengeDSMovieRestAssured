@@ -151,7 +151,20 @@ public class MovieControllerRA {
 	}
 	
 	@Test
+	@DisplayName("Insert Should Return Forbidden When Client Logged")
 	public void insertShouldReturnForbiddenWhenClientLogged() throws Exception {
+		var postBody = new JSONObject(move);
+
+		given()
+			.header("Content-type", "application/json")
+			.header("Authorization", "Bearer " + clientToken)
+			.contentType(ContentType.JSON)
+			.accept(ContentType.JSON)
+			.body(postBody)
+		.when().post("/movies")
+		.then()
+			.statusCode(403)
+		;
 	}
 	
 	@Test
