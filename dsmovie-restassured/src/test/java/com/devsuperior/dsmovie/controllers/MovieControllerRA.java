@@ -3,9 +3,13 @@ package com.devsuperior.dsmovie.controllers;
 import com.devsuperior.dsmovie.tests.TokenUtil;
 import io.restassured.http.ContentType;
 import org.json.JSONException;
+import org.json.simple.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
@@ -18,6 +22,8 @@ public class MovieControllerRA {
 
 	private Long existingId, nonExistingId;
 	private String baseImgUri;
+
+	private Map<String, Object> move;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -35,6 +41,12 @@ public class MovieControllerRA {
 		existingId = 2L;
 		nonExistingId = 5000L;
 		baseImgUri = "https://www.themoviedb.org/t/p/w533_and_h300_bestv2";
+
+		move = new HashMap<>();
+		move.put("title", "New Movie");
+		move.put("score", 0.0d);
+		move.put("count", 0);
+		move.put("image", baseImgUri + "/vIgyYkXkg6NC2whRbYjBD7eb3Er.jpg");
 	}
 
 	@Test
