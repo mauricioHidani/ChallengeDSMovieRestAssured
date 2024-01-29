@@ -64,6 +64,7 @@ public class MovieControllerRA {
 		.then()
 			.statusCode(200)
 			.body("content.id", hasItems(2))
+			.body("content.title", hasItems("Venom: Tempo de Carnificina"))
 			.body("content.score", hasItems(3.3f))
 			.body("content.count", hasItems(3))
 			.body("content.image", hasItems(baseImgUri + "/vIgyYkXkg6NC2whRbYjBD7eb3Er.jpg"))
