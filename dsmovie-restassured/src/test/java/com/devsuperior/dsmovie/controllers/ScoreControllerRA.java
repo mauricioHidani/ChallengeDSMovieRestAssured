@@ -31,7 +31,7 @@ public class ScoreControllerRA {
 		invalidToken = "invalid-token";
 
 		score = new HashMap<>();
-		score.put("movieId", 2);
+		score.put("movieId", 2L);
 		score.put("score", 1.2d);
 	}
 	
